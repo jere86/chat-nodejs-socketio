@@ -15,6 +15,10 @@ body {
     max-width: 1200px;
 }
 
+#message-container div {
+    padding: 5px;
+}
+
 #send-container {
     position: fixed;
     bottom: 0;
