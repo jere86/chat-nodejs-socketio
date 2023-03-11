@@ -3,8 +3,16 @@ const messageContainer = document.getElementById('message-container');
 const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 
-socket.on('chat-message', data => {
-    appendMessage(data);
+socket.on('chat-my-message', data => {
+    if (data != '') {
+        appendMyMessage(data);
+    }
+});
+
+socket.on('chat-others-message', data => {
+    if (data != '') {
+        appendOthersMessage(data);
+    }
 });
 
 messageForm.addEventListener('submit', e => {
@@ -14,8 +22,16 @@ messageForm.addEventListener('submit', e => {
     messageInput.value = '';
 });
 
-const appendMessage = (message) => {
+const appendMyMessage = (data) => {
     const messageElement = document.createElement('div');
-    messageElement.innerText = message;
+    messageElement.className = 'my';
+    messageElement.innerText = data;
+    messageContainer.append(messageElement);
+}
+
+const appendOthersMessage = (data) => {
+    const messageElement = document.createElement('div');
+    messageElement.className = 'others';
+    messageElement.innerText = data;
     messageContainer.append(messageElement);
 }
